@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   StyleSheet,
@@ -48,7 +48,7 @@ const Login = () => {
       <View style={styles.bottom}>
         <Text style={styles.regis}>Đăng ký</Text>
         <View style={styles.containerinput}>
-            <Text style={styles.textdk}>Họ và tên</Text>
+          <Text style={styles.textdk}>Họ và tên</Text>
           <TextInput
             style={styles.input}
             onChangeText={onChangePhoneNumber}
@@ -67,8 +67,8 @@ const Login = () => {
             keyboardType="default"
             onSubmitEditing={dismissKeyboard}
           />
-             <View style={{ height: 17 }} />
-          <Text> style={styles.textdk}Họ và tên</Text>
+          <View style={{ height: 17 }} />
+          <Text style={styles.textdk}>Họ và tên</Text>
           <TextInput
             style={styles.input}
             onChangeText={onChangePassword}
@@ -158,9 +158,9 @@ const styles = StyleSheet.create({
     height: 305,
     marginTop: 22,
     alignItems: 'center'
-  
+
   },
-  textdk :{
+  textdk: {
     alignSelf: 'flex-start'
   },
   input: {

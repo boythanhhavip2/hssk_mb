@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   StyleSheet,
@@ -50,24 +50,37 @@ const Login = () => {
       </View>
       <View style={styles.bottom}>
         <Text style={styles.login}>Đăng nhập</Text>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangePhoneNumber}
-            value={phoneNumber}
-            placeholder="Nhập số điện thoại"
-            keyboardType="numeric"
-            onSubmitEditing={dismissKeyboard}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangePassword}
-            value={password}
-            placeholder="Nhập mật khẩu"
-            keyboardType="default"
-            onSubmitEditing={dismissKeyboard}
-          />
-          <View style={{width: 327}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <View style={styles.texticon}>
+            <Image
+              source={require('../../assets/icons/iconsdt.png')} // Đường dẫn tới tệp ảnh biểu tượng
+              style={styles.icon}
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangePhoneNumber}
+              value={phoneNumber}
+              placeholder="Nhập số điện thoại"
+              keyboardType="numeric"
+              onSubmitEditing={dismissKeyboard}
+            />
+          </View>
+          <View>
+            <Image
+              source={require('../../assets/icons/keycloselock.png')} // Đường dẫn tới tệp ảnh biểu tượng
+              style={styles.icon}
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangePassword}
+              value={password}
+              placeholder="Nhập mật khẩu"
+              keyboardType="default"
+              onSubmitEditing={dismissKeyboard}
+            />
+          </View>
+
+          <View style={{ width: 327 }}>
             <Text style={styles.forgot} onPress={headForgot}>
               Quên mật khẩu?
             </Text>
@@ -161,7 +174,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDD',
     marginTop: 32,
-    paddingLeft: 23,
+    paddingLeft: 60,
   },
   forgot: {
     textAlign: 'center',
@@ -188,7 +201,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#FFF',
   },
-  rowContainer:{
+  rowContainer: {
     flexDirection: 'row',
     marginTop: 20,
     fontSize: 14,
@@ -201,6 +214,16 @@ const styles = StyleSheet.create({
   textRow1: {
     color: '#0A62CE'
   },
+
+  icon: {
+    top: '55%',
+    height: 24,
+    width: 24,
+    left: "5%",
+    position: 'absolute',
+    zIndex: 1,
+
+  }
 });
 
 export default Login;
