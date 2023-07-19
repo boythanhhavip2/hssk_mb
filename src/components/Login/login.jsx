@@ -51,7 +51,7 @@ const Login = () => {
       <View style={styles.bottom}>
         <Text style={styles.login}>Đăng nhập</Text>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View style={styles.texticon}>
+          <View >
             <Image
               source={require('../../assets/icons/iconsdt.png')} // Đường dẫn tới tệp ảnh biểu tượng
               style={styles.icon}
@@ -69,6 +69,10 @@ const Login = () => {
             <Image
               source={require('../../assets/icons/keycloselock.png')} // Đường dẫn tới tệp ảnh biểu tượng
               style={styles.icon}
+            />
+            <Image
+              source={require('../../assets/icons/Clippath.png')}
+              style={styles.iconclip}
             />
             <TextInput
               style={styles.input}
@@ -223,6 +227,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
 
+  },
+  iconclip: {
+    top: '55%',
+    height: 24,
+    width: 24,
+    left: "75%",
+    position: 'absolute',
+    zIndex: 1
   }
 });
 

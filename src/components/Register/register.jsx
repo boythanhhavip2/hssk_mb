@@ -7,14 +7,20 @@ import {
   Text,
   ImageBackground,
   TextInput,
+  Keyboard,
   TouchableOpacity,
 } from 'react-native';
 
 const Login = () => {
   const backgroundImage = require('../../assets/imgs/bg.jpg');
   const overlayImage = require('../../assets/imgs/logo1.png');
+  const [Name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+
+  const onChangeName = text => {
+    setName(text);
+  }
   const onChangePhoneNumber = text => {
     setPhoneNumber(text);
   };
@@ -24,13 +30,11 @@ const Login = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  const handleRegis = () => {
-    navigation.navigate('Register');
-  };
+
   const navigation = useNavigation();
   const handleLogin = () => {
     // Chuyển hướng sang trang khác (ví dụ: HomeScreen)
-    navigation.navigate('Home');
+    navigation.navigate('Login');
   };
   return (
     <View style={styles.container}>
@@ -51,24 +55,24 @@ const Login = () => {
           <Text style={styles.textdk}>Họ và tên</Text>
           <TextInput
             style={styles.input}
+            onChangeText={onChangeName}
+            value={Name}
+            placeholder="Họ và tên"
+            keyboardType="default"
+            onSubmitEditing={dismissKeyboard}
+          />
+          <View style={{ height: 20 }} />
+          <Text style={styles.textdk}>Số điện thoại</Text>
+          <TextInput
+            style={styles.input}
             onChangeText={onChangePhoneNumber}
             value={phoneNumber}
             placeholder="Nhập số điện thoại"
             keyboardType="numeric"
             onSubmitEditing={dismissKeyboard}
           />
-          <View style={{ height: 17 }} />
-          <Text style={styles.textdk}>Họ và tên</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangePassword}
-            value={password}
-            placeholder="Nhập mật khẩu"
-            keyboardType="default"
-            onSubmitEditing={dismissKeyboard}
-          />
-          <View style={{ height: 17 }} />
-          <Text style={styles.textdk}>Họ và tên</Text>
+          <View style={{ height: 20 }} />
+          <Text style={styles.textdk}>Mật khẩu</Text>
           <TextInput
             style={styles.input}
             onChangeText={onChangePassword}
@@ -78,6 +82,10 @@ const Login = () => {
             onSubmitEditing={dismissKeyboard}
           />
         </View>
+
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonregis}>Đăng ký</Text>
+        </TouchableOpacity>
 
         {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonlg}>Đăng ký</Text>
@@ -140,6 +148,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 500,
     backgroundColor: '#FFF',
+    alignItems: 'center',
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
@@ -161,7 +170,11 @@ const styles = StyleSheet.create({
 
   },
   textdk: {
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    fontSize: 14,
+    top: '-2%',
+    left: 5,
+    fontWeight: '500'
   },
   input: {
     width: 327,
@@ -172,6 +185,12 @@ const styles = StyleSheet.create({
     borderColor: '#DDD',
     paddingLeft: 23,
   },
+  buttonregis: {
+    textAlign: 'center',
+    fontWeight: '700',
+    fontSize: 14,
+    color: '#FFF',
+  },
   button: {
     width: 327,
     height: 44,
@@ -180,14 +199,7 @@ const styles = StyleSheet.create({
     borderColor: '#DDD',
     backgroundColor: '#141ED2',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  buttonlg: {
-    textAlign: 'center',
-    fontWeight: '700',
-    fontSize: 14,
-    color: '#FFF',
+    marginTop: -20
   },
 });
 
