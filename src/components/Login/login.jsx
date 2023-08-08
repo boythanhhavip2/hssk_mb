@@ -7,6 +7,7 @@ import {
   Text,
   ImageBackground,
   TextInput,
+  Keyboard,
   TouchableOpacity,
 } from 'react-native';
 
