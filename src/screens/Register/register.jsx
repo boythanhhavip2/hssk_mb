@@ -11,11 +11,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const Login = () => {
+const Register = () => {
   const backgroundImage = require('../../assets/imgs/bg.jpg');
   const overlayImage = require('../../assets/imgs/logo1.png');
+  const [Name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+  const onChangeName = text => {
+    setName(text);
+  }
   const onChangePhoneNumber = text => {
     setPhoneNumber(text);
   };
@@ -25,16 +31,15 @@ const Login = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  const headForgot = () => {
-    navigation.navigate('Forgot')
-  };// khi ấn vào nút quên mật khẩu sẽ chuyển đến màn  quên mật khẩu
-  const handleRegis = () => {
-    navigation.navigate('Register')
-  };
+
   const navigation = useNavigation();
-  const handleLogin = () => {
+  const handleRegis = () => {
     // Chuyển hướng sang trang khác (ví dụ: HomeScreen)
-    navigation.navigate('Home');
+    if (phoneNumber.trim() === '' || password.trim() === '') {
+      setShowErrorMessage(true);
+      return;
+    }
+    navigation.navigate('Login');
   };
   return (
     <View style={styles.container}>
@@ -50,13 +55,22 @@ const Login = () => {
         <Text style={[styles.text, styles.bottomText]}>Hồ sơ sức khỏe</Text>
       </View>
       <View style={styles.bottom}>
-        <Text style={styles.login}>Đăng nhập</Text>
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View >
-            <Image
-              source={require('../../assets/icons/iconsdt.png')} // Đường dẫn tới tệp ảnh biểu tượng
-              style={styles.icon}
-            />
+        <Text style={styles.regis}>Đăng ký</Text>
+        <View style={styles.containerinput}>
+          <Text style={styles.textdk}>Họ và tên</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeName}
+            value={Name}
+            placeholder="Họ và tên"
+            keyboardType="default"
+            onSubmitEditing={dismissKeyboard}
+          />
+          <View style={{ height: 20 }} />
+          <View style={styles.textRowContainer}>
+              <Text style={styles.textdk}>Số điện thoại</Text>
+              <Text style={styles.texticon}>*</Text>
+            </View>
             <TextInput
               style={styles.input}
               onChangeText={onChangePhoneNumber}
@@ -65,16 +79,14 @@ const Login = () => {
               keyboardType="numeric"
               onSubmitEditing={dismissKeyboard}
             />
-          </View>
-          <View>
-            <Image
-              source={require('../../assets/icons/keycloselock.png')} // Đường dẫn tới tệp ảnh biểu tượng
-              style={styles.icon}
-            />
-            <Image
-              source={require('../../assets/icons/Clippath.png')}
-              style={styles.iconclip}
-            />
+            {showErrorMessage && phoneNumber.trim() === '' && (
+              <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
+            )}
+          <View style={{ height: 20 }} />
+            <View style={styles.textRowContainer}>
+              <Text style={styles.textdk}>Mật khẩu</Text>
+              <Text style={styles.texticon}>*</Text>
+            </View>
             <TextInput
               style={styles.input}
               onChangeText={onChangePassword}
@@ -83,24 +95,18 @@ const Login = () => {
               keyboardType="default"
               onSubmitEditing={dismissKeyboard}
             />
-          </View>
-
-          <View style={{ width: 327 }}>
-            <Text style={styles.forgot} onPress={headForgot}>
-              Quên mật khẩu?
-            </Text>
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonlg}>Đăng nhập</Text>
-          </TouchableOpacity>
-          <View style={styles.rowContainer}>
-            <Text style={styles.textRow}>Bạn chưa có tài khoản? </Text>
-            <Text style={styles.textRow1} onPress={handleRegis}>
-              Đăng Kí Ngay
-            </Text>
-          </View>
+            {showErrorMessage && password.trim() === '' && (
+              <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
+            )}
         </View>
+
+        <TouchableOpacity style={styles.button} onPress={handleRegis}>
+          <Text style={styles.buttonregis}>Đăng ký</Text>
+        </TouchableOpacity>
+
+        {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonlg}>Đăng ký</Text>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -159,10 +165,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 500,
     backgroundColor: '#FFF',
+    alignItems: 'center',
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
-  login: {
+  regis: {
     zIndex: 1,
     color: '#000',
     fontWeight: '500',
@@ -170,24 +177,53 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 39,
   },
+  containerinput: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'flex-start',
+    height: 305,
+    marginTop: 22,
+    // alignItems: 'center'
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 10,
+    fontWeight: '400',
+    marginTop: 5,
+    textAlign: 'left'
+  },
+  textRowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignSelf: 'flex-start',
+  },
+  texticon: {
+    bottom: '2%',
+    marginLeft: 8,
+    fontSize: 14,
+    color: 'red',
+  },
+  textdk: {
+    alignSelf: 'flex-start',
+    fontSize: 14,
+    top: '-2%',
+    left: 5,
+    fontWeight: '500'
+  },
   input: {
-    textAlign: 'auto',
     width: 327,
     height: 44,
     borderRadius: 20,
     backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#DDD',
-    marginTop: 32,
-    paddingLeft: 60,
+    paddingLeft: 23,
   },
-  forgot: {
+  buttonregis: {
     textAlign: 'center',
+    fontWeight: '700',
     fontSize: 14,
-    fontWeight: '500',
-    color: '#0A62CE',
-    alignSelf: 'flex-end',
-    marginTop: 22,
+    color: '#FFF',
   },
   button: {
     width: 327,
@@ -197,46 +233,8 @@ const styles = StyleSheet.create({
     borderColor: '#DDD',
     backgroundColor: '#141ED2',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
+    marginTop: -20
   },
-  buttonlg: {
-    textAlign: 'center',
-    fontWeight: '700',
-    fontSize: 14,
-    color: '#FFF',
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    marginTop: 20,
-    fontSize: 14,
-    fontWeight: '400',
-    textAlign: 'center'
-  },
-  textRow: {
-    color: '#000'
-  },
-  textRow1: {
-    color: '#0A62CE'
-  },
-
-  icon: {
-    top: '55%',
-    height: 24,
-    width: 24,
-    left: "5%",
-    position: 'absolute',
-    zIndex: 1,
-
-  },
-  iconclip: {
-    top: '55%',
-    height: 24,
-    width: 24,
-    left: "75%",
-    position: 'absolute',
-    zIndex: 1
-  }
 });
 
-export default Login;
+export default Register;
