@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 
 const Register = () => {
-  const backgroundImage = require('../../assets/imgs/bg.jpg');
-  const overlayImage = require('../../assets/imgs/logo1.png');
+  const backgroundImage = require('../../assets/imgs/login/bg.png');
+  const overlayImage = require('../../assets/imgs/login/logo.png');
   const [Name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -68,36 +68,36 @@ const Register = () => {
           />
           <View style={{ height: 20 }} />
           <View style={styles.textRowContainer}>
-              <Text style={styles.textdk}>Số điện thoại</Text>
-              <Text style={styles.texticon}>*</Text>
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangePhoneNumber}
-              value={phoneNumber}
-              placeholder="Nhập số điện thoại"
-              keyboardType="numeric"
-              onSubmitEditing={dismissKeyboard}
-            />
-            {showErrorMessage && phoneNumber.trim() === '' && (
-              <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
-            )}
+            <Text style={styles.textdk}>Số điện thoại</Text>
+            <Text style={styles.texticon}>*</Text>
+          </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangePhoneNumber}
+            value={phoneNumber}
+            placeholder="Nhập số điện thoại"
+            keyboardType="numeric"
+            onSubmitEditing={dismissKeyboard}
+          />
+          {showErrorMessage && phoneNumber.trim() === '' && (
+            <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
+          )}
           <View style={{ height: 20 }} />
-            <View style={styles.textRowContainer}>
-              <Text style={styles.textdk}>Mật khẩu</Text>
-              <Text style={styles.texticon}>*</Text>
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangePassword}
-              value={password}
-              placeholder="Nhập mật khẩu"
-              keyboardType="default"
-              onSubmitEditing={dismissKeyboard}
-            />
-            {showErrorMessage && password.trim() === '' && (
-              <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
-            )}
+          <View style={styles.textRowContainer}>
+            <Text style={styles.textdk}>Mật khẩu</Text>
+            <Text style={styles.texticon}>*</Text>
+          </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangePassword}
+            value={password}
+            placeholder="Nhập mật khẩu"
+            keyboardType="default"
+            onSubmitEditing={dismissKeyboard}
+          />
+          {showErrorMessage && password.trim() === '' && (
+            <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
+          )}
         </View>
 
         <TouchableOpacity style={styles.button} onPress={handleRegis}>

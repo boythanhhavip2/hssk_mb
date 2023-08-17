@@ -12,10 +12,11 @@ import {
 } from 'react-native';
 
 const Login = () => {
-  const backgroundImage = require('../../assets/imgs/bg.jpg');
-  const overlayImage = require('../../assets/imgs/logo1.png');
+  const backgroundImage = require('../../assets/imgs/login/bg.png');
+  const overlayImage = require('../../assets/imgs/login/logo.png');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+
   const onChangePhoneNumber = text => {
     setPhoneNumber(text);
   };
@@ -25,13 +26,13 @@ const Login = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
+  const navigation = useNavigation();
   const headForgot = () => {
     navigation.navigate('Forgot')
   };// khi ấn vào nút quên mật khẩu sẽ chuyển đến màn  quên mật khẩu
   const handleRegis = () => {
     navigation.navigate('Register')
   };
-  const navigation = useNavigation();
   const handleLogin = () => {
     // Chuyển hướng sang trang khác (ví dụ: HomeScreen)
     navigation.navigate('Home');
@@ -54,7 +55,7 @@ const Login = () => {
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <View>
             <Image
-              source={require('../../assets/icons/iconsdt.png')} // Đường dẫn tới tệp ảnh biểu tượng
+              source={require('../../assets/imgs/login/icon_phone.png')} // Đường dẫn tới tệp ảnh biểu tượng
               style={styles.icon}
             />
             <TextInput
@@ -66,10 +67,10 @@ const Login = () => {
               onSubmitEditing={dismissKeyboard}
             />
           </View>
-          <View style={{ alignItems: 'center'}}>
+          <View style={{ alignItems: 'center' }}>
             <View>
               <Image
-                source={require('../../assets/icons/keycloselock.png')} // Đường dẫn tới tệp ảnh biểu tượng
+                source={require('../../assets/imgs/login/ic_keylock.png')} // Đường dẫn tới tệp ảnh biểu tượng
                 style={styles.icon}
               />
               <TextInput
@@ -81,8 +82,8 @@ const Login = () => {
                 onSubmitEditing={dismissKeyboard}
               />
             </View>
-             <Image
-              source={require('../../assets/icons/Clippath.png')}
+            <Image
+              source={require('../../assets/imgs/login/ic_clippath.png')}
               style={styles.iconclip}
             />
           </View>
