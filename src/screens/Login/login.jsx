@@ -10,10 +10,15 @@ import {
   Keyboard,
   TouchableOpacity,
 } from 'react-native';
-
+const Imgs = {
+  backgroundImage: require('../../assets/imgs/login/bg.png'),
+  overlayImage: require('../../assets/imgs/login/logo.png'),
+  icPhone: require('../../assets/imgs/login/icon_phone.png'),
+  icLock: require('../../assets/imgs/login/ic_keylock.png'),
+  icClippath: require('../../assets/imgs/login/ic_clippath.png')
+};
 const Login = () => {
-  const backgroundImage = require('../../assets/imgs/login/bg.png');
-  const overlayImage = require('../../assets/imgs/login/logo.png');
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
@@ -41,11 +46,11 @@ const Login = () => {
     <View style={styles.container}>
       <View style={styles.top}>
         <ImageBackground
-          source={backgroundImage}
+          source={Imgs.backgroundImage}
           style={styles.backgroundImage}
         />
         <View style={styles.overlay}>
-          <Image source={overlayImage} style={styles.overlayImage} />
+          <Image source={Imgs.overlayImage} style={styles.overlayImage} />
         </View>
         <Text style={[styles.text, styles.topText]}>HSSK</Text>
         <Text style={[styles.text, styles.bottomText]}>Hồ sơ sức khỏe</Text>
@@ -55,7 +60,7 @@ const Login = () => {
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <View>
             <Image
-              source={require('../../assets/imgs/login/icon_phone.png')} // Đường dẫn tới tệp ảnh biểu tượng
+              source={Imgs.icPhone} // Đường dẫn tới tệp ảnh biểu tượng
               style={styles.icon}
             />
             <TextInput
@@ -70,7 +75,7 @@ const Login = () => {
           <View style={{ alignItems: 'center' }}>
             <View>
               <Image
-                source={require('../../assets/imgs/login/ic_keylock.png')} // Đường dẫn tới tệp ảnh biểu tượng
+                source={Imgs.icLock}
                 style={styles.icon}
               />
               <TextInput
@@ -83,7 +88,7 @@ const Login = () => {
               />
             </View>
             <Image
-              source={require('../../assets/imgs/login/ic_clippath.png')}
+              source={Imgs.icClippath}
               style={styles.iconclip}
             />
           </View>
