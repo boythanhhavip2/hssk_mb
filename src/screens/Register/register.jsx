@@ -95,6 +95,10 @@ const Register = () => {
             keyboardType="default"
             onSubmitEditing={dismissKeyboard}
           />
+          <Image
+            source={require('../../assets/imgs/login/ic_clippath.png')}
+            style={styles.iconclip}
+          />
           {showErrorMessage && password.trim() === '' && (
             <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
           )}
@@ -218,6 +222,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDD',
     paddingLeft: 23,
+  },
+  iconclip: {
+    top: '63%',
+    height: 24,
+    width: 24,
+    left: "69%",
+    position: 'absolute',
+    zIndex: 1
   },
   buttonregis: {
     textAlign: 'center',

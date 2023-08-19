@@ -42,7 +42,7 @@ const OTPConfirmationDialog = ({ visible, onClose, phoneNumber }) => {
                             Xác nhận OTP
                         </Text>
                         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-                            <Text style={styles.closeButtonText}>X</Text>
+                            <Text style={styles.closeButtonText}>✕</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.divider}></View>
