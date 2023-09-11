@@ -18,9 +18,11 @@ const Imgs = {
   icClippath: require('../../assets/imgs/login/ic_clippath.png')
 };
 const Login = () => {
-
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
 
   const onChangePhoneNumber = text => {
     setPhoneNumber(text);
@@ -40,6 +42,22 @@ const Login = () => {
   };
   const handleLogin = () => {
     // Chuyển hướng sang trang khác (ví dụ: HomeScreen)
+    const phoneNumberRegex = /^[0-9]{10}$/;
+    if (!phoneNumberRegex.test(phoneNumber)) {
+      setPhoneNumberError('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số.');
+      return;
+    } else {
+      setPhoneNumberError(''); // Xóa thông báo lỗi nếu hợp lệ
+    }
+
+    // Kiểm tra mật khẩu
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_])(?!.*\s).{6,24}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError('Mật khẩu không hợp lệ. Vui lòng nhập từ 6-24 ký tự, có ít nhất 1 chữ in hoa và 1 ký tự đặc biệt.');
+      return;
+    } else {
+      setPasswordError(''); // Xóa thông báo lỗi nếu hợp lệ
+    }
     navigation.navigate('Home');
   };
   return (
@@ -71,6 +89,7 @@ const Login = () => {
               keyboardType="numeric"
               onSubmitEditing={dismissKeyboard}
             />
+            {phoneNumberError !== '' && <Text style={styles.errorText}>{phoneNumberError}</Text>}
           </View>
           <View style={{ alignItems: 'center' }}>
             <View>
@@ -86,6 +105,7 @@ const Login = () => {
                 keyboardType="default"
                 onSubmitEditing={dismissKeyboard}
               />
+              {passwordError !== '' && <Text style={styles.errorText}>{passwordError}</Text>}
             </View>
             <Image
               source={Imgs.icClippath}
@@ -98,7 +118,6 @@ const Login = () => {
               Quên mật khẩu?
             </Text>
           </View>
-
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonlg}>Đăng nhập</Text>
           </TouchableOpacity>
@@ -177,6 +196,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginTop: 39,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 10,
+    fontWeight: '400',
+    marginTop: 5,
+    textAlign: 'left'
   },
   input: {
     textAlign: 'auto',

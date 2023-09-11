@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableOpacity,
 } from 'react-native';
+import RegistrationSuccessModal from './RegistrationSuccessModal';
 
 const Register = () => {
   const backgroundImage = require('../../assets/imgs/login/bg.png');
@@ -18,7 +19,8 @@ const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [iconTop, setIconTop] = useState(showErrorMessage ? '70%' : '25%');
   const onChangeName = text => {
     setName(text);
   }
@@ -37,9 +39,13 @@ const Register = () => {
     // Chuyển hướng sang trang khác (ví dụ: HomeScreen)
     if (phoneNumber.trim() === '' || password.trim() === '') {
       setShowErrorMessage(true);
+      setIconTop('70%');
       return;
     }
-    navigation.navigate('Login');
+    setShowErrorMessage(false);
+    setIconTop('25%');
+    setIsSuccessModalVisible(true);
+    // navigation.navigate('Login');
   };
   return (
     <View style={styles.container}>
@@ -83,31 +89,38 @@ const Register = () => {
             <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
           )}
           <View style={{ height: 20 }} />
-          <View style={styles.textRowContainer}>
-            <Text style={styles.textdk}>Mật khẩu</Text>
-            <Text style={styles.texticon}>*</Text>
+          <View >
+            <View style={styles.textRowContainer}>
+              <Text style={styles.textdk}>Mật khẩu</Text>
+              <Text style={styles.texticon}>*</Text>
+            </View>
+            <View style={{ display: 'flex', justifyContent: 'center' }} >
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangePassword}
+                value={password}
+                placeholder="Nhập mật khẩu"
+                keyboardType="default"
+                onSubmitEditing={dismissKeyboard}
+              />
+              <Image
+                source={require('../../assets/imgs/login/ic_clippath.png')}
+                style={[styles.iconclip, {top: iconTop}]}
+              />
+            </View>
+            {showErrorMessage && password.trim() === '' && (
+              <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
+            )}
           </View>
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangePassword}
-            value={password}
-            placeholder="Nhập mật khẩu"
-            keyboardType="default"
-            onSubmitEditing={dismissKeyboard}
-          />
-          <Image
-            source={require('../../assets/imgs/login/ic_clippath.png')}
-            style={styles.iconclip}
-          />
-          {showErrorMessage && password.trim() === '' && (
-            <Text style={styles.errorMessage}>Không được bỏ trống trường này!!!</Text>
-          )}
         </View>
 
         <TouchableOpacity style={styles.button} onPress={handleRegis}>
           <Text style={styles.buttonregis}>Đăng ký</Text>
         </TouchableOpacity>
-
+        <RegistrationSuccessModal 
+          isVisible={isSuccessModalVisible}
+          onClose={() => setIsSuccessModalVisible(false)}
+        />
         {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonlg}>Đăng ký</Text>
         </TouchableOpacity> */}
@@ -222,14 +235,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDD',
     paddingLeft: 23,
+    position: 'relative'
   },
   iconclip: {
-    top: '63%',
     height: 24,
     width: 24,
-    left: "69%",
+    left: '85%',
     position: 'absolute',
-    zIndex: 1
+    resizeMode: 'contain',
   },
   buttonregis: {
     textAlign: 'center',

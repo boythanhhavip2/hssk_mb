@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import {
   View,
   StyleSheet,
@@ -16,8 +15,8 @@ const Forgot = () => {
   const backgroundImage = require('../../assets/imgs/login/bg.png');
   const overlayImage = require('../../assets/imgs/login/logo.png');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [showOTPDialog, setShowOTPDialog] = useState(false);
 
   const onChangePhoneNumber = text => {
     setPhoneNumber(text);
@@ -25,10 +24,7 @@ const Forgot = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  const [showOTPDialog, setShowOTPDialog] = useState(false);
-
-
-  const navigation = useNavigation();
+ 
   const handleForgot = () => {
     // Chuyển hướng sang trang khác (ví dụ: HomeScreen)
     if (phoneNumber.trim() === '') {
