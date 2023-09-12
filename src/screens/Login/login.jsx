@@ -21,9 +21,6 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-
   const onChangePhoneNumber = text => {
     setPhoneNumber(text);
   };
@@ -51,13 +48,7 @@ const Login = () => {
     }
 
     // Kiểm tra mật khẩu
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_])(?!.*\s).{6,24}$/;
-    if (!passwordRegex.test(password)) {
-      setPasswordError('Mật khẩu không hợp lệ. Vui lòng nhập từ 6-24 ký tự, có ít nhất 1 chữ in hoa và 1 ký tự đặc biệt.');
-      return;
-    } else {
-      setPasswordError(''); // Xóa thông báo lỗi nếu hợp lệ
-    }
+  
     navigation.navigate('Home');
   };
   return (
@@ -76,7 +67,7 @@ const Login = () => {
       <View style={styles.bottom}>
         <Text style={styles.login}>Đăng nhập</Text>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View>
+          <View style={{  flexDirection: 'column' }}>
             <Image
               source={Imgs.icPhone} // Đường dẫn tới tệp ảnh biểu tượng
               style={styles.icon}
@@ -89,6 +80,8 @@ const Login = () => {
               keyboardType="numeric"
               onSubmitEditing={dismissKeyboard}
             />
+          </View>
+          <View style={{ width: 327 }}>
             {phoneNumberError !== '' && <Text style={styles.errorText}>{phoneNumberError}</Text>}
           </View>
           <View style={{ alignItems: 'center' }}>
@@ -103,9 +96,9 @@ const Login = () => {
                 value={password}
                 placeholder="Nhập mật khẩu"
                 keyboardType="default"
+                secureTextEntry={true}
                 onSubmitEditing={dismissKeyboard}
               />
-              {passwordError !== '' && <Text style={styles.errorText}>{passwordError}</Text>}
             </View>
             <Image
               source={Imgs.icClippath}
